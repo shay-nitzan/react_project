@@ -19,7 +19,7 @@ export function App() {
             <Route path="/about" element = {<About/>}></Route>
 
             <Route path="/robot" element = {<RobotIndex/>} >
-              <Route path="/robot/edit/:robotId?" element = {<RobotEdit/>}/>
+              <Route path="/robot/edit/:robotId?" element = {<RobotEdit/>}/>  {/*nested route*/}
             </Route>
 
             <Route path="/robot/:id" element = {<RobotDetails/>}></Route>
