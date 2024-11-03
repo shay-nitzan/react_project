@@ -18,7 +18,7 @@ export function App() {
             <Route path="/" element = {<Home/>}></Route> {/*the path in adress bar*/}
             <Route path="/about" element = {<About/>}></Route>
 
-            <Route path="/robot" element = {<RobotIndex/>} >
+            <Route path="/robot" element = {<RobotIndex/>} > {/*main robot route*/}
               <Route path="/robot/edit/:robotId?" element = {<RobotEdit/>}/>  {/*nested route*/}
             </Route>
 
