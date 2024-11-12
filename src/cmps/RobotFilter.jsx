@@ -11,17 +11,17 @@ export function RobotFilter({filterBy, onSetFilterBy}) {
 
     function handleChange({ target }) {
         let { name: field, value, type } = target
-        switch (type) {
-            case 'number':
-            case 'range':
-                value = +value
-                break;
-            case 'checkbox':
-                value = target.checked
-                break
-            default:
-                break;
-        }
+        // switch (type) {
+        //     case 'number':
+        //     case 'range':
+        //         value = +value
+        //         break;
+        //     case 'checkbox':
+        //         value = target.checked
+        //         break
+        //     default:
+        //         break;
+        // }
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 

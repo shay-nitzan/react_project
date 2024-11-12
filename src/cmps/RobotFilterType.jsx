@@ -7,21 +7,21 @@ export function RobotFilterType({ filterBy, onSetFilterBy }) {
     useEffect(()=>{
         onSetFilterBy(filterByToEdit)
     }, [filterByToEdit])
-
     
     function handleChange({ target }) {
+        console.log(target.value)
         let { name: field, value, type } = target
-        switch (type) {
-            case 'number':
-            case 'range':
-                value = +value
-                break;
-            case 'checkbox':
-                value = target.checked
-                break
-            default:
-                break;
-        }
+        // switch (type) {
+        //     case 'number':
+        //     case 'range':
+        //         value = +value
+        //         break;
+        //     case 'checkbox':
+        //         value = target.checked
+        //         break
+        //     default:
+        //         break;
+        // }
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
@@ -29,7 +29,7 @@ export function RobotFilterType({ filterBy, onSetFilterBy }) {
         <section className="robot-filter">
             <label htmlFor="type">Choose your type</label>
             <select onChange={handleChange} value={filterByToEdit.type} id="type" name="type" >
-                <option value="">Choose a type</option>
+                <option value="all">All</option>
                 <option value="Cooking">Cooking</option>
                 <option value="Cleaning">Cleaning</option>
                 <option value="Pleasure">Pleasure</option>
