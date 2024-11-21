@@ -1,0 +1,47 @@
+.robot-index {
+    padding: 20px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+  }
+  
+  .robot-index .title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .robot-index .filter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Adds space between filter sections */
+    margin-bottom: 30px; /* Space below filters */
+  }
+  
+  .robot-index .filter-section {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .robot-index .add-robot-link {
+    display: inline-block;
+    margin: 10px 0 30px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .robot-index .add-robot-link:hover {
+    background-color: #0056b3;
+  }
+  
+  .robot-index .robot-list {
+    margin-top: 20px;
+  }
+  

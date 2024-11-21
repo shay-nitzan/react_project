@@ -44,9 +44,6 @@ export function RobotFilter({filterBy, onSetFilterBy}) {
                 type="number" 
                 value={minBatteryStatus || ''} />
             </section>
-            <section>
-                <button>Submit</button>
-            </section>
         </form>
     )
 }   

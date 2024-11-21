@@ -1,0 +1,64 @@
+/* Formik Form container */
+.formik {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Ensure content is centered vertically */
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%; /* Set width to 100% to ensure they take up the full container width */
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form title */
+.formik h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+    text-align: center;
+    font: 'Arial'; /* Basic sans-serif font stack */
+    font-weight: 600; /* Slightly bolder weight */
+    line-height: 1.2;
+}
+
+/* Placeholder styling */
+.formik input::placeholder {
+    color: #888;
+    text-align: center; /* Center placeholder text */
+}
+
+/* Error messages */
+.formik div {
+    color: #d9534f;
+    font-size: 14px;
+    margin-top: -2px;
+    margin-bottom: 8px;
+    text-align: left;
+    width: 100%;
+}
+
+/* Submit button */
+/* .formik button[type="submit"] {
+    width: 45%; 
+    padding: 12px;
+    background-color: #0077ff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+} */
+
+/* Button hover state */
+.formik button[type="submit"]:hover {
+    background-color: #005bb5;
+}
+
+/* Add space between fields */
+.formik .field-wrapper {
+    margin-bottom: 20px; /* Space between fields */
+    width: 100%; /* Ensure fields take full width */
+}

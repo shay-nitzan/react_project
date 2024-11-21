@@ -8,6 +8,7 @@ import { RobotDetails } from "./pages/RobotDetails"
 import { AppFooter } from "./cmps/AppFooter"
 import { AppHeader } from "./cmps/AppHeader"
 import { RobotEdit } from "./pages/RobotEdit"
+import { MapView } from "./pages/MapView"
 
 
 export function App() {
@@ -16,7 +17,7 @@ export function App() {
       <main>
         <Routes>
             <Route path="/" element = {<Home/>}></Route> {/*the path in adress bar*/}
-            <Route path="/about" element = {<About/>}></Route>
+            <Route path="/map" element = {<MapView/>}></Route>
 
             <Route path="/robot" element = {<RobotIndex/>} >
               <Route path="/robot/edit/:robotId?" element = {<RobotEdit/>}/>

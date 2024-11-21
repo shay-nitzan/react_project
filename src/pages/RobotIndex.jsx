@@ -4,6 +4,8 @@ import { RobotList } from '../cmps/RobotList'
 import { RobotFilter } from "../cmps/RobotFilter"
 import { RobotFilterType } from "../cmps/RobotFilterType"
 import { Link, Outlet } from "react-router-dom";
+import "./RobotIndex.css"; // Import the CSS file
+
 
 
 export function RobotIndex() {
@@ -18,9 +20,11 @@ export function RobotIndex() {
         async function loadRobots(){
             try{
                 const robots = await robotService.query(filterBy)
+                console.log(robots)
                 setRobots(robots)
             }
             catch (err){
+
                 console.log(err)
                 alert('Couldnt load robots')
             }
@@ -44,6 +48,7 @@ export function RobotIndex() {
         }
 
         function onSetFilterBy(filterBy) {
+            console.log(filterBy)
             setFilterBy(filterBy)
         }
 
@@ -60,11 +65,17 @@ export function RobotIndex() {
         }
         
         return <section className="robot-index">
-            <h1>Welcome to Robots!</h1>
-            <RobotFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy}/>
-            <RobotFilterType filterBy={filterBy} onSetFilterBy={onSetFilterBy}/>
-            <Link to='/robot/edit'>Add Robot</Link>
-            <RobotList robots={robots} onRemove = {removeRobot}/>
+            <h1 className="title">Welcome to Robots!</h1>
+            <div className="filter-container">
+            <div className="filter-section">
+                <RobotFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+            </div>
+            <div className="filter-section">
+                <RobotFilterType filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+            </div>
+            </div>
+            <Link className="add-robot-link" to="/robot/edit">Add Robot</Link>
+            <RobotList robots={robots} onRemove={removeRobot} />
             <Outlet context={{ onSaveRobot }} />
         </section>
 }
