@@ -1,4 +1,6 @@
-import { useEffect, useState, useSyncExternalStore } from "react"
+import { useEffect, useRef, useState } from "react"
+import { useSearchParams, Link, Outlet, useNavigate } from "react-router-dom";
+
 import { robotService } from "../services/robot.service"
 import { RobotList } from '../cmps/RobotList'
 import { RobotFilter } from "../cmps/RobotFilter"
@@ -10,11 +12,18 @@ import "./RobotIndex.css"; // Import the CSS file
 
 export function RobotIndex() {
     const [ robots, setRobots ] = useState(null)
-    const defaultFilter = robotService.getDefaultFilter()
+    const [ searchParams, setSearchParams ] = useSearchParams()
+    const defaultFilter = robotService.getFilterFromSearchParams(searchParams) || {}
+    const navigate = useNavigate()
     const [filterBy, setFilterBy] = useState(defaultFilter)
+
+    //The value is save over the renders
+    const onSetFilterByDebounce = useRef(debounce(onSetFilterBy, 400)).current
 
     useEffect(() => {
         loadRobots()
+        setSearchParams(filterBy)
+        // console.log(filterBy)
     }, [filterBy])
     
         async function loadRobots(){
@@ -31,13 +40,13 @@ export function RobotIndex() {
         }
 
         if (!robots) return <div>Loading robots...</div>;
+        const {model, minBatteryStatus, type} = filterBy
 
         async function removeRobot(robotId) {
             try{
                 // Call the remove service but don't expect it to return the updated list
                 await robotService.remove(robotId);
-        
-                // Manually filter out the removed robot from the current state
+                // local remove
                 const updatedRobots = robots.filter(robot => robot.id !== robotId);
                 setRobots(updatedRobots);
             }
@@ -52,12 +61,18 @@ export function RobotIndex() {
             setFilterBy(filterBy)
         }
 
-        function onSaveRobot(robot) {
-            // Example save logic
+        async function onSaveRobot(robot) {
             try {
-                robotService.save(robot);
+                const robotToSave = await robotService.save(robot);
+                if (!robot.id){
+                    setRobots(robots => [...robots, robotToSave])
+                }
+                else{
+                    setRobots(robots => robots.map(_robot => _robot.id === robotToSave.id ? robotToSave : _robot))
+                }
                 alert('Robot saved successfully!');
-                loadRobots(); // Refresh the robot list after save
+                navigate('/robot')
+                // loadRobots(); // Refresh the robot list after save
             } catch (err) {
                 console.error('Error saving robot:', err);
                 alert('Couldn\'t save robot');
@@ -79,3 +94,15 @@ export function RobotIndex() {
             <Outlet context={{ onSaveRobot }} />
         </section>
 }
+
+
+// function onSaveRobot(robot) {
+//     try {
+//         robotService.save(robot);
+//         alert('Robot saved successfully!');
+//         loadRobots(); // Refresh the robot list after save
+//     } catch (err) {
+//         console.error('Error saving robot:', err);
+//         alert('Couldn\'t save robot');
+//     }
+// }

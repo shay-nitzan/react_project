@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import { robotService } from "../services/robot.service";
+import { useParams } from "react-router-dom";
+
 
 export function RobotEdit() {
 
     const [robot, setRobot] = useState(robotService.createRobot())
-    const { onSaveRobot } = useOutletContext()
+    const { onSaveRobot } = useOutletContext() // special callback hook
 
+    const { robotId } = useParams();
+    useEffect(() => {
+        if (robotId) {
+            robotService.getById(robotId).then(setRobot).catch(err => {
+                console.error('Failed to load robot:', err);
+            });
+        }
+    }, [robotId]);
 
     function handleChange({ target }) {
         let { name: field, value, type } = target
@@ -25,9 +35,8 @@ export function RobotEdit() {
     }
 
     function onSubmitRobot(ev) {
-        ev.preventDefault()
+        ev.preventDefault() // prevent refresh of the page
         onSaveRobot(robot)
-
     }
 
     const { model, type, batteryStatus } = robot
@@ -53,7 +62,6 @@ export function RobotEdit() {
                 </label>
                 <section className="btns">
                     <button className="btn">Save</button>
-                    {/* <button type="button" className="btn">Back</button> */}
                 </section>
             </form>
         </section>

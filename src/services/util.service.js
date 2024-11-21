@@ -17,6 +17,16 @@ export function loadFromStorage(key, defaultValue = null) {
 	return JSON.parse(value)
 }
 
+export function debounce(func, time) {
+    let timeoutId
+    return (...args) => {
+        clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => {
+            func(...args)
+        }, time)
+    }
+}
+
 export function getRandomInt(min, max) {
 	const minCeiled = Math.ceil(min)
 	const maxFloored = Math.floor(max)

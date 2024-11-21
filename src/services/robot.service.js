@@ -7,7 +7,8 @@ export const robotService = {
     remove,
     save,
     createRobot,
-    getDefaultFilter
+    getDefaultFilter,
+    getFilterFromSearchParams
 }
 
 const STORAGE_KEY = 'robots'
@@ -56,10 +57,21 @@ function createRobot(model = '', type = '', batteryStatus = 100) {
 function getDefaultFilter() {
     return {
         type: 'all',
+        type: 'all',
         minBatteryStatus: 0,
         maxBattery: '',
         model: ''
     }
+}
+
+function getFilterFromSearchParams(searchParams) {
+    const defaultFilter = getDefaultFilter()
+    const filterBy = {}
+    for (const field in defaultFilter) {
+        filterBy[field] = searchParams.get(field) || (field === 'type' ? 'all' : defaultFilter[field])
+    }
+
+    return filterBy
 }
 
 function _createRobots() {
